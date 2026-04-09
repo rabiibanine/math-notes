@@ -1,17 +1,30 @@
 {
-  description = "My math-notes flake!";
+  description = "Typst environment for Math Notes";
 
+  # Pulling from the bleeding-edge unstable branch!
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
   outputs =
     { self, nixpkgs }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
     {
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [
+          typst
+          tinymist
+          zathura
+        ];
 
-      packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-      packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-
+        # Optional: A welcome message when you enter the shell
+        shellHook = ''
+          echo "📐 Typst Math Environment Loaded!"
+          echo "Run 'typst watch main.typ' to start compiling."
+        '';
+      };
     };
 }
