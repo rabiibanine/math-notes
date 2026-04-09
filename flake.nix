@@ -17,7 +17,6 @@
         packages = with pkgs; [
           typst
           tinymist
-          zathura
         ];
 
         # Optional: A welcome message when you enter the shell
