@@ -1,0 +1,14 @@
+# Compiled Typst Output
+*.pdf
+
+# Nix build results (if you ever run nix build)
+result
+result-*
+
+# Direnv hidden state directory (crucial to ignore!)
+.direnv/
+
+# OS/Editor generated files
+.DS_Store
+*~
+*.swp
